@@ -1,6 +1,5 @@
-import Cart from './lib/cart'
-import IItem from "./lib/interface/IItem";
-
+import Cart from './cart'
+import IItem from './interface/IItem';
 
 let item:IItem = {
     itemName : 'IPhone X',
@@ -18,8 +17,19 @@ let item2:IItem = {
     itemDesc : "Black"
 };
 
+let item3:IItem = {
+    itemName : 'Samsung S10',
+    itemCat :"Phones",
+    itemPrice :600,
+    itemQuant : 2,
+    itemDesc : "white"
+};
+
 Cart.addItem(item);
 Cart.addItem(item2);
+Cart.addItem(item3);
 
-//console.log(Cart.getCarts());
-console.log(Cart.getItemByName('IPhone 11'));
+Cart.removeItemByID(3);
+console.log(Cart.getCartSize());
+console.log(Cart.getCartTotal());
+

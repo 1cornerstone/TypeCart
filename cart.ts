@@ -5,32 +5,36 @@ class Cart {
 
     private static count: number = 0;
     private static cart: ICart[] = [];
+    private total :number = 0;
 
     constructor() {
     }
-
     /*
-     *return all items in the cart
+     *return all items in the Cart
      * @return ICart array
      * */
     getCarts(): ICart[] {
         return Cart.cart;
     }
 
-    cartTotal(): number {
-        return 0;
+    getCartTotal(): number {
+        for (const item of Cart.cart){
+           this.total += (item.itemQuant * item.itemPrice)
+
+        }
+        return this.total;
     }
 
     /*
-    *get cart size
-    * @return the size of the cart
+    *get Cart size
+    * @return the size of the Cart
     * */
-    cartSize(): number {
+    getCartSize(): number {
         return Cart.cart.length;
     }
 
     /*
-    * add Item to the cart
+    * add Item to the Cart
     * @param IItem
     * */
     addItem(_item: IItem): void {
@@ -47,7 +51,7 @@ class Cart {
     }
 
     /*
-   * get Item by ID in the cart and return Item
+   * get Item by ID in the Cart and return Item
    * @param  number
    * @return any
    * */
@@ -57,7 +61,7 @@ class Cart {
         }
     }
 
-    /* get Item by Name in the cart and return Item
+    /* get Item by Name in the Cart and return Item
      * @param  number
      * @return any
      * */
@@ -72,22 +76,39 @@ class Cart {
         return _match
     }
 
+    /* remove Item by ID in the Cart
+    * @param  number
+    * @return void
+    * */
     removeItemByID(id: number): void{
-
+         Cart.cart = Cart.cart.filter(value => {  return value.itemID !== id})
     }
 
+    /* remove Item by Name in the Cart
+   * @param  name
+   * @return void
+   * */
     removeItemByName(name: string): void {
+        Cart.cart = Cart.cart.filter(value => {  return value.itemName !== name})
     }
 
-    updateItemQuantity(itemQ: number, name?: string, itemID?: number): void{
-
+    /* Update Item quantity in the Cart
+      * @param itemID  , itemQuantity
+      * @return void
+      * */
+    updateItemQuantity(_itemID: number, itemQ: number):void{
+        for ( const item of Cart.cart){
+                if (item.itemID == _itemID){
+                    item.itemQuant = itemQ;
+                    break;
+                }
+        }
     }
 
-    /*
-    *remove all items
+    /*remove all items
     *@return void
     * */
-    remove(): void {Cart.cart = [];
+    clear(): void {Cart.cart = [];
     }
 
 }
