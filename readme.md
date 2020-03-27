@@ -1,6 +1,6 @@
 **CART**
 
-A flexible and modern shopping cart package.
+A flexible and modern shopping cart package written with typescript
 
    Cart interface
    
